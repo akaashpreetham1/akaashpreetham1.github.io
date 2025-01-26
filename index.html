@@ -18,11 +18,19 @@
     </audio>
     <script>
       const audio = document.getElementById("audioplayer");
-      console.log("Audio"+audio.muted);
+      console.log("Audio is muted? "+audio.muted);
+      console.log("Audio is paused? "+audio.paused)
       // Simulate a user interaction (e.g., a slight delay)
       setTimeout(() => {
         audio.muted = false;
-        console.log("Audio"+audio.muted);
+        audio.pause();
+        console.log("Audio is paused?(2) "+audio.paused)
+        console.log("Audio is muted?(2) "+audio.muted);
+        setTimeout(() => {
+          audio.play();
+          console.log("Audio is paused?(3) "+audio.paused)
+          console.log("Audio source: "+audio.src)
+        },5000);
       }, 1000); // Adjust the delay as needed 
     </script>
     <!-- <audio src="audio/birthday_audio2.mp3" autoplay loop> Your browser does not support the audio element.
