@@ -13,9 +13,18 @@
   </head>
 
   <body>
-    <audio autoplay preload loop> Your browser does not support the audio element.
+    <audio autoplay preload muted id="audioplayer" loop> Your browser does not support the audio element.
       <source src="/audio/birthday_audio.mp3" type="audio/mpeg">
     </audio>
+    <script>
+      const audio = document.getElementById("audioplayer");
+      console.log("Audio"+audio.muted);
+      // Simulate a user interaction (e.g., a slight delay)
+      setTimeout(() => {
+        audio.muted = false;
+        console.log("Audio"+audio.muted);
+      }, 1000); // Adjust the delay as needed 
+    </script>
     <!-- <audio src="audio/birthday_audio2.mp3" autoplay loop> Your browser does not support the audio element.
     </audio> -->
     <div class="container">
