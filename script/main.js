@@ -1,3 +1,62 @@
+var offsetX = $("#loveHeart").width() / 2;
+var offsetY = $("#loveHeart").height() / 2 - 55;
+var together = new Date();
+together.setFullYear(2016, 8, 5);
+together.setHours(16);
+together.setMinutes(30);
+together.setSeconds(0);
+together.setMilliseconds(0);
+
+// function heartDraw(){
+//   if (!document.createElement('canvas').getContext) {
+
+//     console.log("In If Block")
+
+//     var msg = document.createElement("div");
+//     msg.id = "errorMsg";
+//     msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
+//     document.body.appendChild(msg);
+//     $("#code").css("display", "none")
+//     $("#copyright").css("position", "absolute");
+//     $("#copyright").css("bottom", "10px");
+//     document.execCommand("stop");
+//   } else {
+    
+//     console.log("In Else Block")
+    
+//     setTimeout(function () {
+//       console.log("I am here before startHeartAnimation")
+//       startHeartAnimation();
+//     }, 500);
+
+//     // timeElapse(together);
+//     // setInterval(function () {
+//     //   timeElapse(together);
+//     // }, 500);
+
+//     // adjustCodePosition();
+//     // $("#code").typewriter();
+//   }
+// }
+
+
+function playAudio(){
+  const audio = document.getElementById("audioplayer");
+  console.log("Audio muted? "+audio.muted);
+  // Simulate a user interaction (e.g., a slight delay)
+  setTimeout(() => {
+    audio.muted = false;
+    console.log("Audio muted? "+audio.muted);
+    audio.pause();
+    console.log("audio is paused? " +audio.paused)
+    setTimeout(() => {
+      audio.play();
+      console.log("audio is paused? "+audio.paused);
+    },200);
+  }, 200); // Adjust the delay as needed 
+}
+
+
 // Animation Timeline
 const animationTimeline = () => {
   // Spit chars that needs to be animated individually
@@ -31,17 +90,38 @@ const animationTimeline = () => {
   tl.to(".container", 0.1, {
     visibility: "visible",
   })
-    .from(".one", 0.7, {
+    .from("body", 8, {
+      backgroundColor: "#000000"
+    })
+    .to("body", 3, {
+      backgroundColor: "#FFF8E1"
+    })
+    .from(".zero", 3, {
+      opacity: 1,
+    })
+    .add(() => {
+          try {
+            console.log("I am here!");
+            startHeartAnimation();
+            console.log("I am here again!");
+          } catch (error) {
+            console.log("Error in startHeartAnimation:", error);
+          }
+      }, 1)
+    .to(".zero", 2.8, {
+      opacity: 0,
+    })
+    .from(".one", 1.2, {
       opacity: 0,
       y: 10,
     })
-    .from(".two", 0.4, {
+    .from(".two", 0.7, {
       opacity: 0,
       y: 10,
     })
     .to(
       ".one",
-      0.7,
+      1.2,
       {
         opacity: 0,
         y: 10,
@@ -57,14 +137,14 @@ const animationTimeline = () => {
       },
       "-=1"
     )
-    .from(".three", 0.7, {
+    .from(".three", 3, {
       opacity: 0,
       y: 10,
       // scale: 0.7
     })
     .to(
       ".three",
-      0.7,
+      3,
       {
         opacity: 0,
         y: 10,
@@ -104,11 +184,11 @@ const animationTimeline = () => {
     .to(".idea-1", 0.7, ideaTextTransLeave, "+=1.5")
     .from(".idea-2", 0.7, ideaTextTrans)
     .to(".idea-2", 0.7, ideaTextTransLeave, "+=1.5")
-    .from(".idea-3", 0.7, ideaTextTrans)
-    .to(".idea-3 strong", 0.5, {
+    .from(".idea-3", 3, ideaTextTrans)
+    .to(".idea-3 strong", 3, {
       scale: 1.2,
       x: 10,
-      backgroundColor: "rgb(21, 161, 237)",
+      backgroundColor: "#FF69B4",
       color: "#fff",
     })
     .to(".idea-3", 0.7, ideaTextTransLeave, "+=1.5")
@@ -168,6 +248,32 @@ const animationTimeline = () => {
       0.2,
       "+=1"
     )
+    .from(".fivepointfour", 3, {
+      opacity: 0,
+      scale: 3,
+      ease: Expo.easeOut,
+    })
+    .to(".fivepointfour", 2.7, {
+      opacity: 0,
+      scale: 3,
+      ease: Expo.easeOut,
+    })
+    //Here's the Musee du Louvre
+    .from(".fivepointfive", 7, {
+      opacity: 0,
+      ease: Expo.easeOut,
+      // y: 0,
+      // scale: 0.7
+    })
+    .to(
+      ".fivepointfive",
+      8,
+      {
+        opacity: 0,
+        // y: 0,
+      },
+      "+=10"
+    )
     .staggerFromTo(
       ".baloons img",
       2.5,
@@ -198,10 +304,22 @@ const animationTimeline = () => {
       y: 350,
       rotation: -180,
       opacity: 0,
-    })
+    })  
+    .staggerTo(
+      ".eight svg",
+      1.5,
+      {
+        visibility: "visible",
+        opacity: 0,
+        scale: 80,
+        repeat: 1,
+        repeatDelay: 1.4,
+      },
+      0.3
+    )
     .staggerFrom(
       ".wish-hbd span",
-      0.7,
+      0.9,
       {
         opacity: 0,
         y: -50,
@@ -214,7 +332,7 @@ const animationTimeline = () => {
     )
     .staggerFromTo(
       ".wish-hbd span",
-      0.7,
+      0.9,
       {
         scale: 1.4,
         rotationY: 150,
@@ -238,28 +356,23 @@ const animationTimeline = () => {
       },
       "party"
     )
-    .staggerTo(
-      ".eight svg",
-      1.5,
-      {
-        visibility: "visible",
-        opacity: 0,
-        scale: 80,
-        repeat: 3,
-        repeatDelay: 1.4,
-      },
-      0.3
-    )
+    // .staggerTo(
+    //   ".eight svg",
+    //   1.5,
+    //   {
+    //     visibility: "visible",
+    //     opacity: 0,
+    //     scale: 80,
+    //     repeat: 1,
+    //     repeatDelay: 1.4,
+    //   },
+    //   0.3
+    // )
     .to(".six", 0.5, {
       opacity: 0,
       y: 30,
       zIndex: "-1",
     })
-    // .to(".eightpointfive", 0.5, {
-    //   opacity: 0,
-    //   y: 30,
-    //   zIndex: "-1",
-    // })
     .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
     .to(
       ".last-smile",
@@ -307,4 +420,122 @@ const resolveFetch = () => {
   });
 };
 
-resolveFetch().then(animationTimeline());
+//Variables for months
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+// Variable for day lists
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+// HTML DOM Document Selector Method
+const theBirthday = document.querySelector(".birthdayOn");
+const timeLeft = document.querySelector(".timeleft");
+const formatTime = document.querySelectorAll(".format h4");
+
+let tempDate = new Date();
+let tempYear = tempDate.getFullYear();
+let tempMonth = tempDate.getMonth();
+let tempDay = tempDate.getDate();
+
+// Set the date of my birthday
+const futureBirthday = new Date(2025, 0, 27, 23, 30, 0);
+
+const year = futureBirthday.getFullYear();
+const hours = futureBirthday.getHours();
+const minutes = futureBirthday.getMinutes();
+
+let month = futureBirthday.getMonth();
+month = months[month];
+const weekday = weekdays[futureBirthday.getDay()];
+const date = futureBirthday.getDate();
+
+let amPm = "";
+if (hours > 12) {
+  amPm = "pm";
+} else {
+  amPm = "am";
+}
+
+// Manipulate the text of .birthdayOn
+//theBirthday.textContent = `Birthday on ${weekday}, ${month} ${date}, ${year} at ${hours}:${minutes} ${amPm}`;
+
+const futureTime = futureBirthday.getTime();
+
+// This function for get reminding time
+function getRemindingTime() {
+  const today = new Date().getTime();
+  const t = futureTime - today;
+
+  const oneDay = 24 * 60 * 60 * 1000;
+  const oneHour = 60 * 60 * 1000;
+  const oneMinute = 60 * 1000;
+
+  // Calcualte all values
+  let days = t / oneDay;
+  days = Math.floor(days);
+  let hours = Math.floor((t % oneDay) / oneHour);
+  let minutes = Math.floor((t % oneHour) / oneMinute);
+  let seconds = Math.floor((t % oneMinute) / 1000);
+
+  // Set array values
+  const values = [days, hours, minutes, seconds];
+
+  // Manipulate every format element
+  function format(item) {
+    if (item < 10) {
+      return (item = `0${item}`);
+    }
+    return item;
+  }
+
+  formatTime.forEach(function (item, index) {
+    item.innerHTML = format(values[index]);
+  });
+
+  if (t < 0) {
+    clearInterval(countdown);
+    document.getElementById("countdownRemove").remove();
+    playAudio();
+    // console.log("Drawing heart")
+    // heartDraw();
+    // console.log("Drew heart")
+    setTimeout(() => {
+      // document.getElementById("mainDiv").remove();
+      console.log("Starting animationTimeline")
+      resolveFetch().then(animationTimeline());
+    }, 100);
+  }
+}
+
+// Countdown based on interval
+let countdown = setInterval(getRemindingTime, 1000);
+
+// Call the main function
+getRemindingTime();
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Set the current year to the span with id "currnetYear"
+//document.getElementById("currentYear").textContent = currentYear;
+
