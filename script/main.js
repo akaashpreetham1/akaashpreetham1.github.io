@@ -458,7 +458,7 @@ let tempMonth = tempDate.getMonth();
 let tempDay = tempDate.getDate();
 
 // Set the date of my birthday
-const futureBirthday = new Date(2025, 0, 28, 1, 0, 0);
+const futureBirthday = new Date(2025, 0, 28, 0, 0, 0);
 
 const year = futureBirthday.getFullYear();
 const hours = futureBirthday.getHours();
